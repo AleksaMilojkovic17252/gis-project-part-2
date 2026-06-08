@@ -1,4 +1,4 @@
-# GIS Projekat 2: OGC Geoprostorni veb servisi
+# GIS Projekat 2: OGC Geo-prostorni Web servisi
 
 ## Preduslovi
 
