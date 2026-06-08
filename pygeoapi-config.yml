@@ -1,0 +1,248 @@
+server:
+  bind:
+    host: 0.0.0.0
+    port: 5000
+  url: http://localhost:5000
+  mimetype: application/json; charset=UTF-8
+  encoding: utf-8
+  language: en-US
+  cors: true
+  gzip: false
+  admin: false
+  limits:
+    default_items: 10
+    max_items: 100000
+  map:
+    url: https://tile.openstreetmap.org/{z}/{x}/{y}.png
+    attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+
+logging:
+  level: DEBUG
+  logfile: /dev/stdout
+
+metadata:
+  identification:
+    title: Austria GIS Web Service
+    description: OGC API serving Austrian geospatial data from OpenStreetMap
+    keywords:
+      - geospatial
+      - austria
+      - openstreetmap
+    keywords_type: theme
+    terms_of_service: https://creativecommons.org/licenses/by/4.0/
+    url: http://localhost:5000
+  license:
+    name: CC-BY 4.0 license
+    url: https://creativecommons.org/licenses/by/4.0/
+  provider:
+    name: GIS Project
+    url: http://localhost:5000
+  contact:
+    name: Aleksa
+    role: pointOfContact
+    email: aleksa@example.com
+
+resources:
+
+  # ============================================================
+  # TOPIC 1: PUBLIC TRANSPORT
+  # ============================================================
+
+  transit-stops:
+    type: collection
+    title: Transit Stops
+    description: Bus stops, tram stops, and railway stations in Austria
+    keywords:
+      - transport
+      - bus
+      - tram
+      - station
+    links: []
+    extents:
+      spatial:
+        bbox: [9.5, 46.3, 17.2, 49.0]   # Austria bounding box
+        crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+    providers:
+      - type: feature                      # This makes it available as OGC API Features (WFS)
+        name: PostgreSQL
+        data:
+          host: localhost
+          port: 5432
+          dbname: spatial_db_austria
+          user: aleksa
+          password: aleksa1234
+          search_path: [public]
+        id_field: node_id
+        table: transit_stops
+        geom_field: geom
+
+  transit-routes:
+    type: collection
+    title: Transit Routes
+    description: Railway, tram, and subway lines in Austria
+    keywords:
+      - transport
+      - railway
+      - tram
+      - subway
+    links: []
+    extents:
+      spatial:
+        bbox: [9.5, 46.3, 17.2, 49.0]
+        crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+    providers:
+      - type: feature
+        name: PostgreSQL
+        data:
+          host: localhost
+          port: 5432
+          dbname: spatial_db_austria
+          user: aleksa
+          password: aleksa1234
+          search_path: [public]
+        id_field: way_id
+        table: transit_routes
+        geom_field: geom
+
+  # ============================================================
+  # TOPIC 2: POWER INFRASTRUCTURE
+  # ============================================================
+
+  power-towers:
+    type: collection
+    title: Power Towers
+    description: Electricity transmission towers and poles in Austria
+    keywords:
+      - power
+      - electricity
+      - infrastructure
+    links: []
+    extents:
+      spatial:
+        bbox: [9.5, 46.3, 17.2, 49.0]
+        crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+    providers:
+      - type: feature
+        name: PostgreSQL
+        data:
+          host: localhost
+          port: 5432
+          dbname: spatial_db_austria
+          user: aleksa
+          password: aleksa1234
+          search_path: [public]
+        id_field: node_id
+        table: power_towers
+        geom_field: geom
+
+  power-lines:
+    type: collection
+    title: Power Lines
+    description: High-voltage power lines and cables in Austria
+    keywords:
+      - power
+      - electricity
+      - transmission
+    links: []
+    extents:
+      spatial:
+        bbox: [9.5, 46.3, 17.2, 49.0]
+        crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+    providers:
+      - type: feature
+        name: PostgreSQL
+        data:
+          host: localhost
+          port: 5432
+          dbname: spatial_db_austria
+          user: aleksa
+          password: aleksa1234
+          search_path: [public]
+        id_field: way_id
+        table: power_lines
+        geom_field: geom
+
+  substations:
+    type: collection
+    title: Power Substations
+    description: Electrical substations in Austria
+    keywords:
+      - power
+      - substation
+      - infrastructure
+    links: []
+    extents:
+      spatial:
+        bbox: [9.5, 46.3, 17.2, 49.0]
+        crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+    providers:
+      - type: feature
+        name: PostgreSQL
+        data:
+          host: localhost
+          port: 5432
+          dbname: spatial_db_austria
+          user: aleksa
+          password: aleksa1234
+          search_path: [public]
+        id_field: area_id
+        table: substations
+        geom_field: geom
+
+  # ============================================================
+  # TOPIC 3: BUILDINGS & LANDMARKS
+  # ============================================================
+
+  landmarks:
+    type: collection
+    title: Landmarks & Attractions
+    description: Tourist attractions, museums, monuments, and places of worship in Austria
+    keywords:
+      - tourism
+      - landmarks
+      - monuments
+    links: []
+    extents:
+      spatial:
+        bbox: [9.5, 46.3, 17.2, 49.0]
+        crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+    providers:
+      - type: feature
+        name: PostgreSQL
+        data:
+          host: localhost
+          port: 5432
+          dbname: spatial_db_austria
+          user: aleksa
+          password: aleksa1234
+          search_path: [public]
+        id_field: node_id
+        table: landmarks_points
+        geom_field: geom
+
+  buildings:
+    type: collection
+    title: Buildings
+    description: Churches, cathedrals, museums, and notable buildings in Austria
+    keywords:
+      - buildings
+      - churches
+      - museums
+    links: []
+    extents:
+      spatial:
+        bbox: [9.5, 46.3, 17.2, 49.0]
+        crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+    providers:
+      - type: feature
+        name: PostgreSQL
+        data:
+          host: localhost
+          port: 5432
+          dbname: spatial_db_austria
+          user: aleksa
+          password: aleksa1234
+          search_path: [public]
+        id_field: area_id
+        table: buildings
+        geom_field: geom
