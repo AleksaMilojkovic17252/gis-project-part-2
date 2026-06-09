@@ -44,10 +44,6 @@ metadata:
 
 resources:
 
-  # ============================================================
-  # TOPIC 1: PUBLIC TRANSPORT
-  # ============================================================
-
   transit-stops:
     type: collection
     title: Transit Stops
@@ -60,10 +56,10 @@ resources:
     links: []
     extents:
       spatial:
-        bbox: [9.5, 46.3, 17.2, 49.0]   # Austria bounding box
+        bbox: [9.5, 46.3, 17.2, 49.0]
         crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
     providers:
-      - type: feature                      # This makes it available as OGC API Features (WFS)
+      - type: feature
         name: PostgreSQL
         data:
           host: localhost
@@ -103,10 +99,6 @@ resources:
         id_field: way_id
         table: transit_routes
         geom_field: geom
-
-  # ============================================================
-  # TOPIC 2: POWER INFRASTRUCTURE
-  # ============================================================
 
   power-towers:
     type: collection
@@ -188,10 +180,6 @@ resources:
         id_field: area_id
         table: substations
         geom_field: geom
-
-  # ============================================================
-  # TOPIC 3: BUILDINGS & LANDMARKS
-  # ============================================================
 
   landmarks:
     type: collection
